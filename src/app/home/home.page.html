@@ -1,20 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Tarefas
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-item>
+      <ion-label position="floating">Descrição da tarefa {{a}}</ion-label>
+      <ion-input [(ngModel)]="tarefa.descricao" ></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="adicionar()">Adicionar</ion-button>
+    <h2 *ngIf="tarefas.length > 0" style="color: var(--ion-color-dark)">Lista de tarefas</h2>
+    <ion-list>
+      <ion-item *ngFor="let item of tarefas">
+        <ion-label (click)="toggleStatus(item.id)" [ngClass]="{'marcado': item.concluido}">{{ item.descricao }}</ion-label>
+        <span class="button-excluir" (click)="excluir(item.id)">X</span>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>
